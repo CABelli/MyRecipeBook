@@ -25,36 +25,34 @@ namespace MyRecipeBook.Controllers
 
         [HttpGet]
         [Route("get-list")]
-        //public async Task<ActionResult<PriceProductClient>> Get(string titleRecipe) => Ok(await _priceProductClientRepository.GetAllPrice(titleRecipe));
-        public async Task<ActionResult<IEnumerable<PriceProductClientGetAllDto>>> GetAllPricies(string titleRecipe)
+        public async Task<ActionResult<IEnumerable<PriceProductClientGetAllDto>>> GetAllPricies()
         {
-            var priceProductClients = await _priceProductClientRepository.GetAllPrice02(titleRecipe);
-                //.GetAllPrice(titleRecipe);
+            var priceProductClients = await _priceProductClientRepository.GetAllPrice();
             
             if (priceProductClients == null) return NotFound("Not easy");
 
-            
-            var priceProductClientListDTO = new PriceProductClientGetAllDto()
-            {
-            };
+            var priceProdCliList = new  List<PriceProductClientGetAllDto>();
 
-            IEnumerable x = PriceProductClientGetAllDto();
-
-            foreach ( var priceProductClient in priceProductClients)
+            foreach (var priceProdCli in priceProductClients)
             {
-                var product = await _productRepository.GetByName(titleRecipe);
-                new PriceProductClientGetAllDto()
+                var product = await _productRepository.GetById(priceProdCli.IdProduct);
+
+                string nameProduct = "";
+                if (product == null) nameProduct = " Not Found !!! ";
+                else nameProduct = product.NameProduct;
+                
+                var priceProductClientGetAllDto = new PriceProductClientGetAllDto()
                 {
-                    NameProduct = product.NameProduct,
-                    ProductValue = priceProductClient.ProductValue
-
+                    NameProduct = nameProduct,
+                    ProductValue = priceProdCli.ProductValue,
+                    DateValidate = priceProdCli.DateValidate,
+                    IdPrice = priceProdCli.Id,
                 };
 
-                priceProductClientListDTO.ad
+                priceProdCliList.Add(priceProductClientGetAllDto);
             }
-
-
-            return priceProductClientListDTO;
+            
+            return priceProdCliList.ToList();
         }
 
         [HttpPost]

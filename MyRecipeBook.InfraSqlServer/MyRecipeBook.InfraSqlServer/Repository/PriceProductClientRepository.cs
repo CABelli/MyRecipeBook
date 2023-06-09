@@ -15,7 +15,7 @@ namespace MyRecipeBook.InfraSqlServer.Repository
             _dbSet = dbContext.Set<PriceProductClient>();
         }
 
-        public Task<List<PriceProductClient>> GetAllPrice02(string titleRecipe)
+        public Task<List<PriceProductClient>> GetAllPrice()
         {
             return _dbSet.AsQueryable().ToListAsync<PriceProductClient>();
         }
@@ -29,19 +29,6 @@ namespace MyRecipeBook.InfraSqlServer.Repository
 
             //await _dbSet.
             //await _unitOfWork.CommitAsync();
-        }
-
-        public Task<IEnumerable<PriceProductClient>> GetAllPrice(string titleRecipe)
-        {
-            //return _dbSet.AsQueryable().ToListAsync<T>();
-            //_dbSet.AsQueryable().ToListAsync<PriceProductClient>();
-
-            //.ToListAsync<PriceProductClient>();
-
-            //return _dbSet.ToListAsync();
-            //return _dbSet.AsQueryable().ToListAsync<PriceProductClient>();
-            throw new NotImplementedException();
-            //return _dbSet.ToListAsync<PriceProductClient>();
         }
     }
 }

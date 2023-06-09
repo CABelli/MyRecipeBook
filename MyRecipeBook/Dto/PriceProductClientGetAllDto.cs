@@ -8,6 +8,6 @@
 
         public DateTime? DateValidate { get; set; }
 
-        public Guid Id { get; set; }         
+        public Guid IdPrice { get; set; }         
     }
 }

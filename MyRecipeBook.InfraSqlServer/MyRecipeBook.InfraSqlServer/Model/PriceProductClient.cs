@@ -1,6 +1,6 @@
 ﻿namespace MyRecipeBook.InfraSqlServer.Model
 {
-    public class PriceProductClient// IPriceProductClientRepository PriceProductClientController
+    public class PriceProductClient
     {
         public Guid Id { get; set; } = Guid.NewGuid();
 
